@@ -6,5 +6,6 @@ public class TastAbstract {
         AbstractFactory abstractFaxtoryImpl = new AbstractFaxtoryImpl();
         System.out.println(abstractFaxtoryImpl.baoma());
         System.out.println(abstractFaxtoryImpl.falali());
+        System.out.print(abstractFaxtoryImpl.dazhong());
     }
 }
