@@ -10,7 +10,7 @@ public class LazySecond {
 
     private static LazySecond lazySecond = null;
 
-    public static LazySecond getIntance(){
+    public static synchronized LazySecond getIntance(){
         if(lazySecond == null){
             lazySecond = new LazySecond();
         }
