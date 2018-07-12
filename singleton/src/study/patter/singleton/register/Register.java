@@ -19,7 +19,11 @@ public class Register {
             name = Register.class.getName();
         }
         if(list.get(name) == null){
-            list.putIfAbsent(name,new Register());
+            synchronized (Register.class) {
+                if (list.get(name) == null) {
+                    list.put(name, new Register());
+                }
+            }
         }
         return list.get(name);
     }

@@ -31,6 +31,11 @@ public class RegisterTest {
         }catch(Exception e){
 
         }
-    }
 
+//        for (int i = 0; i < 20000000;i ++) {
+//            Object obj = Register.getIntance(null);
+//        }
+//        long end = System.currentTimeMillis();
+//        System.out.println("总耗时：" + (end - start));
+    }
 }
