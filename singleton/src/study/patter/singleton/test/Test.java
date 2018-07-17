@@ -11,6 +11,7 @@ import study.patter.singleton.lazy.LazyThird;
 /*
 * time 20180710
 * author suxin
+* description 单例模式
 * */
 public class Test extends Thread{
 
