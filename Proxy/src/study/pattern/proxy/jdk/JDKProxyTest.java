@@ -3,6 +3,7 @@ package study.pattern.proxy.jdk;
 import sun.misc.ProxyGenerator;
 
 import java.io.FileOutputStream;
+import java.lang.reflect.Method;
 
 public class JDKProxyTest {
     public static void main(String[] args) {
@@ -10,6 +11,9 @@ public class JDKProxyTest {
             Person person = (Person) new JDKFindLove().getInstance(new OnePerson());
             person.findJob();
 
+//            Person person = new OnePerson();
+//            Method mth = person.getClass().getMethod("zufangzi");
+//            mth.invoke(person);
 
             //原理：
             //1、拿到被代理对象的引用，并且获取到它的所有的接口，反射获取
@@ -19,10 +23,10 @@ public class JDKProxyTest {
             //5、再重新加载到JVM中运行
             //以上这个过程就叫字节码重组
 
-            byte [] bytes = ProxyGenerator.generateProxyClass("$Proxy0",new Class[]{Person.class});
-            FileOutputStream os = new FileOutputStream("E://$Proxy0.class");
-            os.write(bytes);
-            os.close();
+//            byte [] bytes = ProxyGenerator.generateProxyClass("$Proxy0",new Class[]{Person.class});
+//            FileOutputStream os = new FileOutputStream("E://$Proxy0.class");
+//            os.write(bytes);
+//            os.close();
 
         }catch (Exception e){
             e.printStackTrace();
