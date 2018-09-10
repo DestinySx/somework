@@ -18,10 +18,11 @@ public class RegisterTest {
         for(int i=0;i<count;i++){
             new Thread(){
                 public void run(){
+                    latch.countDown();
                     System.out.println(System.currentTimeMillis()+":"+ Register.getIntance(null));
                 }
             }.start();
-            latch.countDown();
+
         }
 
         try{
