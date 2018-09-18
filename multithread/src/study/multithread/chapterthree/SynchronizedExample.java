@@ -4,7 +4,7 @@ package study.multithread.chapterthree;
  * Created with IntelliJ IDEA.
  * User: suxin
  * Date: 2018/9/7   Time: 15:55
- * Description:
+ * Description: synchronized 修饰方法
  **/
 public class SynchronizedExample {
     private int a = 0;

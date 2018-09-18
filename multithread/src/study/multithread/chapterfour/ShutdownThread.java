@@ -11,14 +11,14 @@ import java.util.concurrent.TimeUnit;
 public class ShutdownThread {
     public static void main(String[] args) throws InterruptedException {
 
-        Thread countThread = new Thread(new Runner(), "CountThread");
+        Thread countThread = new Thread(new Runner(), "CountThread1");
         countThread.start();
         // 睡眠1秒，main线程对CountThread进行中断，使CountThread能够感知中断而结束
         TimeUnit.SECONDS.sleep(1);
         countThread.interrupt();
 
         Runner two = new Runner();
-        countThread = new Thread(two, "CountThread");
+        countThread = new Thread(two, "CountThread2");
         countThread.start();
         // 睡眠1秒，main线程对Runner two进行取消，使CountThread能够感知on为false而结束
         TimeUnit.SECONDS.sleep(1);
@@ -33,7 +33,7 @@ public class ShutdownThread {
             while (on && !Thread.currentThread().isInterrupted()){
                 i++;
             }
-            System.out.println("Count i = " + i);
+            System.out.println(Thread.currentThread().getName()+"Count i = " + i);
         }
         public void cancel() {
             on = false;

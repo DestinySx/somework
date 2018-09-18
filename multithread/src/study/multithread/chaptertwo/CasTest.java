@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created with IntelliJ IDEA.
  * User: suxin
  * Date: 2018/9/7   Time: 11:43
- * Description:
+ * Description: cas原理--  原子类型
  **/
 public class CasTest {
     private AtomicInteger atomicI = new AtomicInteger(0);
