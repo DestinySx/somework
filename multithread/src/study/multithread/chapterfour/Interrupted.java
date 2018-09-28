@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
  * Created with IntelliJ IDEA.
  * User: suxin
  * Date: 2018/9/9   Time: 14:32
- * Description: 线程中断
+ * Description: 线程中断  interrupt()
  **/
 public class Interrupted {
     public static void main(String[] args) throws Exception {
@@ -20,6 +20,11 @@ public class Interrupted {
         busyThread.setDaemon(true);
         sleepThread.start();
         busyThread.start();
+
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("SleepThread interrupted is AAA" + sleepThread.isInterrupted());
+        System.out.println("BusyThread interrupted is AAA" + busyThread.isInterrupted());
+
         // 休眠5秒，让sleepThread和busyThread充分运行
         TimeUnit.SECONDS.sleep(5);
         sleepThread.interrupt();
@@ -27,7 +32,7 @@ public class Interrupted {
         System.out.println("SleepThread interrupted is " + sleepThread.isInterrupted());
         System.out.println("BusyThread interrupted is " + busyThread.isInterrupted());
         // 防止sleepThread和busyThread立刻退出
-        SleepUtils.second(2);
+        SleepUtils.second(1);
     }
 
     static class SleepRunner implements Runnable {
@@ -42,6 +47,8 @@ public class Interrupted {
         @Override
         public void run() {
             while (true) {
+                //System.out.println(Thread.currentThread().isInterrupted());
+                //System.out.print("111");
             }
         }
     }

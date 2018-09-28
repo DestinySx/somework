@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
  * Created with IntelliJ IDEA.
  * User: suxin
  * Date: 2018/9/9   Time: 14:51
- * Description:安全和优雅的中断线程
+ * Description: 安全和优雅的中断线程.使用isInterrupted() 或者 标志位判断
  **/
 public class ShutdownThread {
     public static void main(String[] args) throws InterruptedException {
