@@ -8,14 +8,16 @@ import java.io.PipedWriter;
  * Created with IntelliJ IDEA.
  * User: suxin
  * Date: 2018/9/9   Time: 16:43
- * Description:输入输出通道
+ * Description:输入输出通道 Pipe
  **/
 public class Piped {
     public static void main(String[] args) throws IOException {
         PipedWriter out = new PipedWriter();
         PipedReader in = new PipedReader();
-        // 将输出流和输入流进行连接，否则在使用时会抛出IOException
-        out.connect(in);
+        // 将输出流和输入流进行连接，否则在使用时会抛出IOException.两种绑定方式都可以
+        // out.connect(in);
+        in.connect(out);
+
         int receive = 0;
         Thread printThread = new Thread(new Print(in), "PrintThread");
         printThread.start();
