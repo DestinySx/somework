@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * Created with IntelliJ IDEA.
  * User: suxin
  * Date: 2018/9/9   Time: 14:42
- * Description:暂停、恢复和停止
+ * Description:线程的暂停、恢复和停止
  **/
 public class Deprecated {
     public static void main(String[] args) throws Exception {
