@@ -6,7 +6,9 @@ import java.util.concurrent.atomic.AtomicReference;
  * Created with IntelliJ IDEA.
  * User: suxin
  * Date: 2018/9/11   Time: 11:45
- * Description:
+ * Description:·AtomicReference：原子更新引用类型。
+               ·AtomicReferenceFieldUpdater：原子更新引用类型里的字段。
+               ·AtomicMarkableReference：原子更新带有标记位的引用类型。
  **/
 public class AtomicReferenceTest {
     public static AtomicReference<User> atomicUserRef = new AtomicReference<User>();
