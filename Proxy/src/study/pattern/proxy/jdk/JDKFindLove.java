@@ -16,9 +16,9 @@ public class JDKFindLove implements InvocationHandler{
     }
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable{
-        System.out.println("开始找对象：");
+        System.out.println("开始找工作：");
         method.invoke(this.person,args);
-        System.out.println("找对象结束！");
+        System.out.println("找工作结束！");
         return  null;
     }
 }

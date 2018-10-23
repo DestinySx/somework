@@ -11,9 +11,9 @@ public class JDKProxyTest {
             Person person = (Person) new JDKFindLove().getInstance(new OnePerson());
             person.findJob();
 
-//            Person person = new OnePerson();
-//            Method mth = person.getClass().getMethod("zufangzi");
-//            mth.invoke(person);
+            Person person1 = new OnePerson();
+            Method mth = person1.getClass().getMethod("zufangzi");
+            mth.invoke(person1);
 
             //原理：
             //1、拿到被代理对象的引用，并且获取到它的所有的接口，反射获取
