@@ -28,7 +28,7 @@ public class SXBeanDefinitionReader {
 
     public SXBeanDefinitionReader(String... location){
         //通过URL定位找到其所对应的文件，然后转化为文件流
-        InputStream is = this.getClass().getClassLoader().getResourceAsStream(location[0].replace("classPath:",""));
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream(location[0].replace("classpath:",""));
 
         try {
             config.load(is);
@@ -74,7 +74,7 @@ public class SXBeanDefinitionReader {
 
                 Class<?> beanClass = Class.forName(className);
                 if(beanClass.isInterface()){continue;}
-                beanDefinitions.add(doCreateBeanDefinition(beanClass.getSimpleName(),beanClass.getName()));
+                beanDefinitions.add(doCreateBeanDefinition(toLowerFirstCase(beanClass.getSimpleName()),beanClass.getName()));
 
                 Class<?> [] interfaces = beanClass.getInterfaces();
                 for(Class i:interfaces){
@@ -92,7 +92,7 @@ public class SXBeanDefinitionReader {
         try{
             SXBeanDefinition beanDefinition = new SXBeanDefinition();
             beanDefinition.setBeanClassName(className);
-            beanDefinition.setFactoryBeanName(toLowerFirstCase(simpleName));
+            beanDefinition.setFactoryBeanName(simpleName);
             return  beanDefinition;
         }catch (Exception e){
             e.printStackTrace();
