@@ -3,6 +3,11 @@ package com.study.spring.framework.context;
 import com.study.spring.framework.annotation.SXAutowired;
 import com.study.spring.framework.annotation.SXController;
 import com.study.spring.framework.annotation.SXService;
+import com.study.spring.framework.aop.SXAopProxy;
+import com.study.spring.framework.aop.SXCglibAopProxy;
+import com.study.spring.framework.aop.SXJdkDynamicAopProxy;
+import com.study.spring.framework.aop.config.SXAopConfig;
+import com.study.spring.framework.aop.support.SXAdvisedSupport;
 import com.study.spring.framework.beans.SXBeanWrapper;
 import com.study.spring.framework.beans.SXBeanFactory;
 import com.study.spring.framework.beans.config.SXBeanDefinition;
@@ -123,6 +128,15 @@ public class SXApplicationContext extends SXDefaultListableBeanFactory implement
             }else{
                 Class<?> clazz = Class.forName(className);
                 instance = clazz.newInstance();
+
+                SXAdvisedSupport config = instantionAopConfig(sxBeanDefinition);
+                config.setTargetClass(clazz);
+                config.setTarget(instance);
+                //符合PointCut的规则的话，闯将代理对象
+                if(config.pointCutMatch()) {
+                    instance = createProxy(config).getProxy();
+                }
+
                 singletonObjects.put(className,instance);
                 singletonObjects.put(sxBeanDefinition.getFactoryBeanName(),instance);
             }
@@ -163,6 +177,31 @@ public class SXApplicationContext extends SXDefaultListableBeanFactory implement
         }
     }
 
+
+    private SXAopProxy createProxy(SXAdvisedSupport config) {
+
+        Class targetClass = config.getTargetClass();
+        if(targetClass.getInterfaces().length > 0){
+            return new SXJdkDynamicAopProxy(config);
+        }
+        return new SXCglibAopProxy(config);
+    }
+
+    private SXAdvisedSupport instantionAopConfig(SXBeanDefinition gpBeanDefinition) {
+        SXAopConfig config = new SXAopConfig();
+        config.setPointCut(this.sxBeanDefinitionReader.getConfig().getProperty("pointCut"));
+        config.setAspectClass(this.sxBeanDefinitionReader.getConfig().getProperty("aspectClass"));
+        config.setAspectBefore(this.sxBeanDefinitionReader.getConfig().getProperty("aspectBefore"));
+        config.setAspectAfter(this.sxBeanDefinitionReader.getConfig().getProperty("aspectAfter"));
+        config.setAspectAfterThrow(this.sxBeanDefinitionReader.getConfig().getProperty("aspectAfterThrow"));
+        config.setAspectAfterThrowingName(this.sxBeanDefinitionReader.getConfig().getProperty("aspectAfterThrowingName"));
+        return new SXAdvisedSupport(config);
+    }
+
+    public Properties getConfig(){
+        return this.sxBeanDefinitionReader.getConfig();
+    }
+
     public String[] getBeanDefinitionNames(){
         return this.beanDefinitionMap.keySet().toArray(new String[this.beanDefinitionMap.size()]);
     }
@@ -171,7 +210,4 @@ public class SXApplicationContext extends SXDefaultListableBeanFactory implement
         return this.beanDefinitionMap.size();
     }
 
-    public Properties getConfig(){
-        return this.sxBeanDefinitionReader.getConfig();
-    }
 }
