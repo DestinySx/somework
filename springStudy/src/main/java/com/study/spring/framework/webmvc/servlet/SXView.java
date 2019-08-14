@@ -42,15 +42,26 @@ public class SXView {
                 paramName = paramName.replaceAll("￥\\{|\\}","");
                 Object paramValue = model.get(paramName);
                 if(null==paramValue){continue;}
-                line = matcher.replaceFirst(paramValue.toString());
+                line = matcher.replaceFirst(makeStringForRegExp(paramValue.toString()));
                 matcher = pattern.matcher(line);
             }
             sb.append(line);
         }
 
-
         response.setCharacterEncoding("utf-8");
         //response.setContentType(DEFAULT_CONTENT_TYPE);
         response.getWriter().write(sb.toString());
+    }
+
+    //处理特殊字符
+    public static String makeStringForRegExp(String str) {
+        return str.replace("\\", "\\\\").replace("*", "\\*")
+                .replace("+", "\\+").replace("|", "\\|")
+                .replace("{", "\\{").replace("}", "\\}")
+                .replace("(", "\\(").replace(")", "\\)")
+                .replace("^", "\\^").replace("$", "\\$")
+                .replace("[", "\\[").replace("]", "\\]")
+                .replace("?", "\\?").replace(",", "\\,")
+                .replace(".", "\\.").replace("&", "\\&");
     }
 }
