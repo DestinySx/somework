@@ -7,4 +7,8 @@ package com.study.spring.demo.service;
  * Description:
  **/
 public interface IMyService {
+
+    String query(String name);
+
+    String add(String name,String addr) throws Exception;
 }
