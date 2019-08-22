@@ -22,7 +22,17 @@ public class Main {
         list.add(7);
         list.add(6);
         list.add(5);
-        Collections.sort(list);
+        //Collections.sort(list);
+
+
+        //
+        list.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
+        });
+
         for(int i:list){
             System.out.print(i+" ");
         }
@@ -49,7 +59,8 @@ public class Main {
         modle.b = 312;
     }
 
-    public static void main(String[] args){
+
+    private void change(){
         Main main = new Main();
         int a=1,b=1;
         main.change(a,b);
@@ -68,8 +79,11 @@ public class Main {
 
         Modle modle = new Modle("123",123);
         main.change(modle);
-
         System.out.println("========");
+    }
+
+    public static void main(String[] args){
+        sort();
     }
 
     private static class Modle{
